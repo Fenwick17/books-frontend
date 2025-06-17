@@ -1,4 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
+import type React from 'react';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const Route = createFileRoute({
@@ -8,11 +9,12 @@ export const Route = createFileRoute({
 function RouteComponent() {
   const navigate = useNavigate()
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    console.log('EMAIL + PASSWORD: ', email, password);
+
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
 
     fetch(`${API_URL}/auth/register`, {
       method: 'POST',

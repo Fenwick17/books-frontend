@@ -8,10 +8,11 @@ export const Route = createFileRoute({
 function RouteComponent() {
   const navigate = useNavigate()
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
 
     fetch(`${API_URL}/auth/login`, {
       method: 'POST',
