@@ -1,4 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const Route = createFileRoute({
   component: RouteComponent,
@@ -12,7 +13,7 @@ function RouteComponent() {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    fetch('http://localhost:3000/auth/login', {
+    fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
