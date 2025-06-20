@@ -1,11 +1,8 @@
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate } from "react-router";
+import React from 'react'
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const Route = createFileRoute({
-  component: RouteComponent,
-})
-
-function RouteComponent() {
+export function Login() {
   const navigate = useNavigate()
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -27,7 +24,7 @@ function RouteComponent() {
       })
       .then(data => {
         console.log('Login successful:', data);
-        navigate({ to: '/' });
+        navigate("/");
       })
       .catch(error => {
         console.error('Error:', error);
@@ -40,9 +37,8 @@ function RouteComponent() {
         <input type="text" name="email" id="email" />
         <label htmlFor="password">Register</label>
         <input type="password" name="password" id="password" />
-        <button>Continue</button>
+        <button type="submit" data-testid="login-submit">Continue</button>
       </form>
     </div>
   );
 }
-
